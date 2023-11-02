@@ -52,7 +52,7 @@ const ContributionGraph = () => {
 
   const daysOfWeek = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"];
   const yesterday = new Date();
-  yesterday.setDate(yesterday.getDate() - 1);
+  yesterday.setDate(yesterday.getDate());
   const yesterdayName = getDayOfWeekFromDate(
     yesterday.toISOString().split("T")[0]
   );
@@ -79,7 +79,7 @@ const ContributionGraph = () => {
 
       for (let j = 0; j < 51; j++) {
         const currentDate = new Date();
-        currentDate.setDate(currentDate.getDate() - 7 * 51 + (i + 7 * j));
+        currentDate.setDate(currentDate.getDate() - 7 * 51 + (i + 7 * j) + 1);
 
         const dayOfWeek = getDayOfWeekFromDate(
           currentDate.toISOString().split("T")[0]
