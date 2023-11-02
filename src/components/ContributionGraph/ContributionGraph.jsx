@@ -50,6 +50,27 @@ const ContributionGraph = () => {
     return month;
   };
 
+  const daysOfWeek = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"];
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
+  const yesterdayName = getDayOfWeekFromDate(
+    yesterday.toISOString().split("T")[0]
+  );
+
+  const yesterdayIndex = daysOfWeek.indexOf(yesterdayName);
+
+  const orderedDaysOfWeek = daysOfWeek
+    .slice(yesterdayIndex + 1)
+    .concat(daysOfWeek.slice(0, yesterdayIndex + 1));
+
+  const createDaysOfWeek = () => {
+    return orderedDaysOfWeek.map((day, index) => (
+      <div key={`day-of-week-${index}`} className="day-of-week">
+        {day}
+      </div>
+    ));
+  };
+
   const createCalendar = () => {
     const calendar = [];
 
@@ -117,6 +138,7 @@ const ContributionGraph = () => {
 
   return (
     <div className="calendar">
+      <div className="days-of-week">{createDaysOfWeek()}</div>
       <div className="calendar-grid">{createCalendar()}</div>
     </div>
   );
